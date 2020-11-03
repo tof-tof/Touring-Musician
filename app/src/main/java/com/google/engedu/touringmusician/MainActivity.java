@@ -74,5 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   // public void on
+   public void onSwitch(View v){
+        map.setShowAll();
+   }
 }

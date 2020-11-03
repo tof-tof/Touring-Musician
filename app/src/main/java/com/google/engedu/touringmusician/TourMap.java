@@ -35,6 +35,7 @@ public class TourMap extends View {
     private CircularLinkedList ClosestList = new CircularLinkedList();
     private CircularLinkedList SmallestList = new CircularLinkedList();
     private String insertMode = "Add";
+    private boolean showAll = true;
 
     public TourMap(Context context) {
         super(context);
@@ -62,18 +63,21 @@ public class TourMap extends View {
             }
             prevPoint = p;
         }
-        Paint beginningPaint = new Paint();
-        beginningPaint.setColor(Color.BLUE);
-        beginningPaint.setStrokeWidth(20);
-        drawLinesInList(canvas,BeginningList,beginningPaint);
-        Paint closestPaint = new Paint();
-        closestPaint.setColor(Color.MAGENTA);
-        closestPaint.setStrokeWidth((float) 10);
-        drawLinesInList(canvas,ClosestList,closestPaint);
-        Paint smallestPaint = new Paint();
-        smallestPaint.setColor(Color.YELLOW);
-        smallestPaint.setStrokeWidth(5);
-        drawLinesInList(canvas,SmallestList,smallestPaint);
+        if (showAll){
+            Paint beginningPaint = new Paint();
+            beginningPaint.setColor(Color.BLUE);
+            beginningPaint.setStrokeWidth(20);
+            drawLinesInList(canvas,BeginningList,beginningPaint);
+            Paint closestPaint = new Paint();
+            closestPaint.setColor(Color.MAGENTA);
+            closestPaint.setStrokeWidth((float) 10);
+            drawLinesInList(canvas,ClosestList,closestPaint);
+            Paint smallestPaint = new Paint();
+            smallestPaint.setColor(Color.YELLOW);
+            smallestPaint.setStrokeWidth(5);
+            drawLinesInList(canvas,SmallestList,smallestPaint);
+        }
+
         /*
         if (startPoint!= null && prevPoint != null){
             canvas.drawLine(prevPoint.x,prevPoint.y,startPoint.x,startPoint.y,linePaint);
@@ -133,5 +137,9 @@ public class TourMap extends View {
 
     public void setInsertMode(String mode) {
         insertMode = mode;
+    }
+
+    public void setShowAll(){
+        showAll = !showAll;
     }
 }

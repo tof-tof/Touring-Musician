@@ -27,45 +27,47 @@
     tools:context="com.google.engedu.touringmusician.MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:id="@+id/top_layout">
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/game_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tap on map to set concert sites."
-            android:layout_weight="1"
-            android:id="@+id/game_status" />
+            android:layout_marginEnd="5pt"
+            android:layout_weight="0"
+            android:text="Tap on map to set concert sites." />
 
         <TextView
             android:id="@+id/BeginningCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tap on map to set concert sites." />
+            android:layout_marginEnd="5pt"
+            android:layout_weight="0" />
 
         <TextView
             android:id="@+id/ClosestCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tap on map to set concert sites." />
+            android:layout_marginEnd="5pt"
+            android:layout_weight="0" />
 
         <TextView
             android:id="@+id/SmallestCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tap on map to set concert sites." />
+            android:layout_marginEnd="5pt"
+            android:layout_weight="0" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_alignBottom="@+id/top_layout"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/mode_selector"
@@ -76,13 +78,27 @@
                 android:text="Insert Mode" />
 
             <Button
-                android:text="Reset"
+                android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/button"
-                android:onClick="onReset" />
+                android:layout_alignParentTop="true"
+                android:onClick="onReset"
+                android:text="Reset" />
+
+            <Switch
+                android:id="@+id/showAllModes"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="107dp"
+                android:layout_weight="1"
+                android:checked="true"
+                android:onClick="onSwitch"
+                android:text="show all insert modes"
+                android:textOff='"only selected insert mode shown"'
+                android:textOn='"all insert modes shown"'
+                tools:checked="true" />
 
         </LinearLayout>
 
