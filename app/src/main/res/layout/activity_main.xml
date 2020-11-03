@@ -40,6 +40,27 @@
             android:layout_weight="1"
             android:id="@+id/game_status" />
 
+        <TextView
+            android:id="@+id/BeginningCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tap on map to set concert sites." />
+
+        <TextView
+            android:id="@+id/ClosestCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tap on map to set concert sites." />
+
+        <TextView
+            android:id="@+id/SmallestCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tap on map to set concert sites." />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

@@ -65,5 +65,14 @@ public class MainActivity extends AppCompatActivity {
         if (message != null) {
             message.setText("Tap map to add new tour stops.");
         }
+        TextView B_message = (TextView) findViewById(R.id.BeginningCost);
+        B_message.setText("");
+        TextView C_message = (TextView) findViewById(R.id.ClosestCost);
+        C_message.setText("");
+        TextView S_message = (TextView) findViewById(R.id.SmallestCost);
+        S_message.setText("");
+
     }
+
+   // public void on
 }

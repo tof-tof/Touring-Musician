@@ -31,6 +31,9 @@ public class TourMap extends View {
 
     private Bitmap mapImage;
     private CircularLinkedList list = new CircularLinkedList();
+    private CircularLinkedList BeginningList = new CircularLinkedList();
+    private CircularLinkedList ClosestList = new CircularLinkedList();
+    private CircularLinkedList SmallestList = new CircularLinkedList();
     private String insertMode = "Add";
 
     public TourMap(Context context) {
@@ -48,23 +51,46 @@ public class TourMap extends View {
         pointPaint.setColor(Color.RED);
         Paint linePaint  = new Paint();
         linePaint.setColor(Color.BLACK);
-        linePaint.setStrokeWidth(5);
+        linePaint.setStrokeWidth((float) 3.5);
         Point startPoint = null;
         Point prevPoint = null;
         for (Point p : list) {
             if (startPoint==null) {startPoint=p;}
-            canvas.drawCircle(p.x, p.y, 20, pointPaint);
+            canvas.drawCircle(p.x, p.y, 30, pointPaint);
             if (prevPoint!=null) {
                 canvas.drawLine(prevPoint.x,prevPoint.y,p.x,p.y,linePaint);
             }
             prevPoint = p;
         }
+        Paint beginningPaint = new Paint();
+        beginningPaint.setColor(Color.BLUE);
+        beginningPaint.setStrokeWidth(20);
+        drawLinesInList(canvas,BeginningList,beginningPaint);
+        Paint closestPaint = new Paint();
+        closestPaint.setColor(Color.MAGENTA);
+        closestPaint.setStrokeWidth((float) 10);
+        drawLinesInList(canvas,ClosestList,closestPaint);
+        Paint smallestPaint = new Paint();
+        smallestPaint.setColor(Color.YELLOW);
+        smallestPaint.setStrokeWidth(5);
+        drawLinesInList(canvas,SmallestList,smallestPaint);
         /*
         if (startPoint!= null && prevPoint != null){
             canvas.drawLine(prevPoint.x,prevPoint.y,startPoint.x,startPoint.y,linePaint);
         }
         */
     }
+
+    private void drawLinesInList(Canvas canvas,CircularLinkedList list,Paint linePaint){
+        Point prevPoint = null;
+        for (Point p : list) {
+            if (prevPoint!=null) {
+                canvas.drawLine(prevPoint.x,prevPoint.y,p.x,p.y,linePaint);
+            }
+            prevPoint = p;
+        }
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -78,18 +104,30 @@ public class TourMap extends View {
                 } else {
                     list.insertBeginning(p);
                 }
-                TextView message = (TextView) ((Activity) getContext()).findViewById(R.id.game_status);
-                if (message != null) {
-                    message.setText(String.format("Tour length is now %.2f", list.totalDistance()));
-                }
+                BeginningList.insertBeginning(p);
+                ClosestList.insertNearest(p);
+                SmallestList.insertSmallest(p);
+                updateCostMessage(list,R.id.game_status,insertMode);
+                updateCostMessage(BeginningList,R.id.BeginningCost,"beginning");
+                updateCostMessage(ClosestList,R.id.ClosestCost, "closest");
+                updateCostMessage(SmallestList,R.id.SmallestCost, "smallest");
                 invalidate();
                 return true;
         }
         return super.onTouchEvent(event);
     }
+    private void updateCostMessage(CircularLinkedList list,int TextViewId,String tourType ){
+        TextView message = (TextView) ((Activity) getContext()).findViewById(TextViewId);
+        if (message != null) {
+            message.setText(String.format("Tour length using %s insert mode is now %.2f", tourType,list.totalDistance()));
+        }
+    }
 
     public void reset() {
         list.reset();
+        BeginningList.reset();
+        ClosestList.reset();
+        SmallestList.reset();
         invalidate();
     }
 
