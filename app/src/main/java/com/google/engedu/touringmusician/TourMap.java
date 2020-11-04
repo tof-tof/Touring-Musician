@@ -35,6 +35,7 @@ public class TourMap extends View {
     private CircularLinkedList ClosestList = new CircularLinkedList();
     private CircularLinkedList SmallestList = new CircularLinkedList();
     private String insertMode = "Add";
+    private String currentInsertMode = "beginning";
     private boolean showAll = true;
 
     public TourMap(Context context) {
@@ -101,17 +102,21 @@ public class TourMap extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Point p = new Point((int) event.getX(), (int)event.getY());
+                TextView message = (TextView) ((Activity) getContext()).findViewById(R.id.game_status);
                 if (insertMode.equals("Closest")) {
                     list.insertNearest(p);
+                    message.setTextColor(Color.MAGENTA);
                 } else if (insertMode.equals("Smallest")) {
                     list.insertSmallest(p);
+                    message.setTextColor(Color.YELLOW);
                 } else {
                     list.insertBeginning(p);
+                    message.setTextColor(Color.BLUE);
                 }
                 BeginningList.insertBeginning(p);
                 ClosestList.insertNearest(p);
                 SmallestList.insertSmallest(p);
-                updateCostMessage(list,R.id.game_status,insertMode);
+                updateCostMessage(list,R.id.game_status,currentInsertMode);
                 updateCostMessage(BeginningList,R.id.BeginningCost,"beginning");
                 updateCostMessage(ClosestList,R.id.ClosestCost, "closest");
                 updateCostMessage(SmallestList,R.id.SmallestCost, "smallest");
@@ -141,5 +146,9 @@ public class TourMap extends View {
 
     public void setShowAll(){
         showAll = !showAll;
+    }
+
+    public void setCurrentInsertMode(String mode){
+        currentInsertMode = mode;
     }
 }

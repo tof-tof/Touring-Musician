@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         map.setInsertMode(item.getTitle().toString());
+                        map.setCurrentInsertMode(item.getTitle().toString());
                         return true;
                     }
                 });

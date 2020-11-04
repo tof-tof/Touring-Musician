@@ -46,21 +46,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5pt"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:textColor="#0000FF" />
 
         <TextView
             android:id="@+id/ClosestCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5pt"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:textColor="#E91E63" />
 
         <TextView
             android:id="@+id/SmallestCost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5pt"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:textColor="#FFEB3B" />
 
         <LinearLayout
             android:layout_width="match_parent"
